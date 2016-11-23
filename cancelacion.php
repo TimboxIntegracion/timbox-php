@@ -6,7 +6,7 @@ $wsdl_contrasena = "password";
 
 //parametros para la cancelación del CFDI
 $rfc = "IAD121214B34";
-$uuid = "A7A812CC-3B51-4623-A219-8F4173D061FE";
+$uuid_cancelar = "A7A812CC-3B51-4623-A219-8F4173D061FE";
 $pfx_path = 'path_del_archivo/iad121214b34.pfx';
 $bin_file = file_get_contents($pfx_path);
 $pfx_base64 = base64_encode($bin_file);
@@ -14,6 +14,10 @@ $pfx_password = "12345678a";
 
 //crear un cliente para hacer la petición al WS
 $cliente = new SoapClient($wsdl_url);
+
+//crear el array de uuid o uuids 
+//este nodo se repite cuantas veces se quiera cancelar un uuid
+$uuid = array("uuid" => $uuid_cancelar);
 
 //parametros para llamar la funcion cancelar_cfdi
 $parametros = array(
