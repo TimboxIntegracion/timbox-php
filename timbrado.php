@@ -22,6 +22,8 @@ $parametros = array(
 try {
     //llamar la funcion timbrar_cfdi
     $respuesta = $cliente->__soapCall("timbrar_cfdi", $parametros);
+    //imprimir el contenido del XML timbrado
+    var_dump($cliente->__getLastResponse());
 } catch (Exception $exception) {
     //imprimir los mensajes de la excepcion
     echo $exception->getCode();
