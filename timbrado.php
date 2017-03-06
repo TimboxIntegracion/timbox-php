@@ -10,7 +10,10 @@ $documento_xml = file_get_contents($ruta_xml);
 $xml_base64 = base64_encode($documento_xml);
 
 //crear un cliente para hacer la petición al WS
-$cliente = new SoapClient($wsdl_url);
+$cliente = new SoapClient($wsdl_url, array(
+        'trace' => 1,
+        'use' => SOAP_LITERAL,
+    ));
 
 //parametros para llamar la funcion timbrar_cfdi
 $parametros = array(
