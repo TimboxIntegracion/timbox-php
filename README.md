@@ -17,7 +17,10 @@ $xml_base64 = base64_encode($documento_xml);
 Crear un cliente y hacer el llamado al método timbrar_cfdi enviándole los parametros con la información necesaria:
 
 ```
-$cliente = new SoapClient($wsdl_url);
+$cliente = new SoapClient($wsdl_url, array(
+        'trace' => 1,
+        'use' => SOAP_LITERAL,
+    ));
 
 //parametros para llamar la funcion timbrar_cfdi
 $parametros = array(
