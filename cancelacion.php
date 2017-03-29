@@ -1,21 +1,22 @@
 <?php
 //parametros para la conexión al Webservice
 $wsdl_url = "https://staging.ws.timbox.com.mx/timbrado/wsdl";
-$wsdl_usuario = "user_name";
-$wsdl_contrasena = "password";
+$wsdl_usuario = "AAA010101000";
+$wsdl_contrasena = "h6584D56fVdBbSmmnB";
 
 //parametros para la cancelación del CFDI
-$rfc = "IAD121214B34";
-$uuid_cancelar = "A7A812CC-3B51-4623-A219-8F4173D061FE";
-$pfx_path = 'path_del_archivo/iad121214b34.pfx';
+$rfc = "AAA010101AAA";
+$uuid_cancelar = "3553A1EE-FFD9-47A3-95D9-1528E65AF5CF";
+$pfx_path = 'archivoPfx.pfx';
 $bin_file = file_get_contents($pfx_path);
 $pfx_base64 = base64_encode($bin_file);
+echo $pfx_base64;
 $pfx_password = "12345678a";
 
 //crear un cliente para hacer la petición al WS
 $cliente = new SoapClient($wsdl_url);
 
-//crear el array de uuid o uuids 
+//crear el array de uuid o uuids
 //este nodo se repite cuantas veces se quiera cancelar un uuid
 $uuid = array("uuid" => $uuid_cancelar);
 
@@ -32,11 +33,11 @@ $parametros = array(
 try {
     //llamar la funcion cancelar_cfdi
     $respuesta = $cliente->__soapCall("cancelar_cfdi", $parametros);
-    var_dump($respuesta);
+    echo $respuesta->comprobantes_cancelados;
 } catch (Exception $exception) {
     //imprimir los mensajes de la excepcion
-    echo $exception->getCode();
-    echo $exception->getMessage();
+    echo "# del error: " . $exception->getCode() . "\n";
+    echo "Descripción del error: " . $exception->getMessage() . "\n";
 }
 
 ?>
