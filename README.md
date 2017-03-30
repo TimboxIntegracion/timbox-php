@@ -7,7 +7,7 @@ Se deberá hacer uso de las URL que hacen referencia al WSDL, en cada petición 
 
 - [Timbox Producción](https://sistema.timbox.com.mx/timbrado/wsdl)
 
-## Activar librereria SOAP Client
+## Activar libreria SOAP Client
 En caso de tener problemas con la libreria SOAP Client de php, normalmente se debe a que por defecto esta desactivada.
 
 La solución es editar el archivo php.ini generalmente ubicado en **/etc/php.ini**, la solución es la siguiente:
