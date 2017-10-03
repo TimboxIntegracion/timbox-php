@@ -1,6 +1,6 @@
 <?php
 //parametros para la conexión al Webservice
-$wsdl_url = "https://staging.ws.timbox.com.mx/timbrado/wsdl";
+$wsdl_url = "https://staging.ws.timbox.com.mx/timbrado_cfdi33/wsdl";
 $wsdl_usuario = "AAA010101000";
 $wsdl_contrasena = "h6584D56fVdBbSmmnB";
 

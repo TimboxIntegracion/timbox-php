@@ -3,9 +3,9 @@ Ejemplo con la integración al Webservice de Timbox
 
 Se deberá hacer uso de las URL que hacen referencia al WSDL, en cada petición realizada:
 
-- [Timbox Pruebas](https://staging.ws.timbox.com.mx/timbrado/wsdl)
+- [Timbox Pruebas](https://staging.ws.timbox.com.mx/timbrado_cfdi33/wsdl)
 
-- [Timbox Producción](https://sistema.timbox.com.mx/timbrado/wsdl)
+- [Timbox Producción](https://sistema.timbox.com.mx/timbrado_cfdi33/wsdl)
 
 ## Activar libreria SOAP Client
 En caso de tener problemas con la libreria SOAP Client de php, normalmente se debe a que por defecto esta desactivada.
@@ -28,7 +28,7 @@ Crear un cliente y hacer el llamado al método timbrar_cfdi enviándole los para
 
 ```
 //parametros para conexion al Webservice (URL de Pruebas)
-$wsdl_url = "https://staging.ws.timbox.com.mx/timbrado/wsdl";
+$wsdl_url = "https://staging.ws.timbox.com.mx/timbrado_cfdi33/wsdl";
 $wsdl_usuario = "AAA010101000";
 $wsdl_contrasena = "h6584D56fVdBbSmmnB";
 $ruta_xml = "archivoXml.xml";
@@ -73,7 +73,7 @@ $pfx_base64 = base64_encode($bin_file);
 Crear un cliente para hacer la petición de cancelación al webservice:
 ```
 //parametros para la conexión al Webservice
-$wsdl_url = "https://staging.ws.timbox.com.mx/timbrado/wsdl";
+$wsdl_url = "https://staging.ws.timbox.com.mx/timbrado_cfdi33/wsdl";
 $wsdl_usuario = "AAA010101000";
 $wsdl_contrasena = "h6584D56fVdBbSmmnB";
 
