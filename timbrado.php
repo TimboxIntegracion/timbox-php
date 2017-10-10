@@ -1,3 +1,4 @@
+/usr/bin/php7.0 -q
 <?php
 //parametros para conexion al Webservice (URL de Pruebas)
 $wsdl_url = "https://staging.ws.timbox.com.mx/timbrado_cfdi33/wsdl";
