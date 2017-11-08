@@ -70,7 +70,7 @@ try {
     //llamar la funcion timbrar_cfdi
     $respuesta = $cliente->__soapCall("timbrar_cfdi", $parametros);
     //imprimir el contenido del XML timbrado
-    echo $respuesta->xml;
+    echo htmlspecialchars($respuesta->xml);
 
 } catch (Exception $exception) {
     //imprimir los mensajes de la excepcion
