@@ -17,7 +17,13 @@ La solución es editar el archivo php.ini generalmente ubicado en **/etc/php.ini
 2. Reiniciar el servidor con la siguiente linea:
 
     **sudo apachectl restart**
+    
+### Generacion de Sello
+Para generar el sello se necesita: la llave privada (.key) y el certificado (.cer) en formato PEM. También es necesario incluir el XSLT del SAT para obtener transformar el XML a la cadena original.
 
+De la cadena original se obtiene el digest y luego se utiliza el digest y la llave privada para obtener el sello. Todo esto se realiza con comandos de OpenSSL.
+
+Finalmente el sello es actualizado en el archivo XML para que pueda ser timbrado.
 ## Timbrar CFDI
 Para hacer una petición de timbrado de un CFDI, deberá enviar las credenciales asignadas, asi como el xml que desea timbrar convertido a una cadena en base64:
 ```
