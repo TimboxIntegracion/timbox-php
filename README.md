@@ -20,11 +20,11 @@ La solución es editar el archivo php.ini generalmente ubicado en **/etc/php.ini
     
 ## Timbrar CFDI
 ### Generacion de Sello
-Para generar el sello se necesita: la llave privada (.key) y el certificado (.cer) en formato PEM. También es necesario incluir el XSLT del SAT para obtener transformar el XML a la cadena original.
+Para generar el sello se necesita: la llave privada (.key) en formato PEM y el XSLT del SAT (cadenaoriginal_3_3.xslt).El XSLT del SAT se utiliza para poder transformar el XML y obtener la cadena original.
 
 De la cadena original se obtiene el digest y luego se utiliza el digest y la llave privada para obtener el sello. Todo esto se realiza con comandos de OpenSSL.
 
-Finalmente el sello es actualizado en el archivo XML para que pueda ser timbrado. Esto se logra mandando llamar el método de actualizarSello:
+Finalmente el sello es actualizado en el archivo XML para que pueda ser timbrado. Esto se logra mandando a llamar el método de actualizarSello:
 ```
 actualizarSello($ruta_xml);
 ```
