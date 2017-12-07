@@ -31,11 +31,10 @@ function actualizarSello($archivoXml){
     file_put_contents('digest.txt', $digest);
     
     //Generar Sello
-    $command = "openssl enc -in digest.txt -out sello.txt -base64 -A -K CSD01_AAA010101AAA.key.pem";
-    $res = shell_exec($command);
+    $sello = base64_encode($digest);
+    file_put_contents('sello.txt', $sello);
 
     //Actualizar el sello del XML
-    $sello = file_get_contents('sello.txt');
     $xmlDoc->firstChild->setAttribute('Sello', $sello);
     $xmlString = $xmlDoc->saveXML();
     file_put_contents($archivoXml, $xmlString);    
