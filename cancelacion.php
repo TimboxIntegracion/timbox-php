@@ -1,41 +1,48 @@
 <?php
-//parametros para la conexión al Webservice
-$wsdl_url = "https://staging.ws.timbox.com.mx/timbrado_cfdi33/wsdl";
+
+// Parametros para la conexión al Webservice
+$wsdl_url = "https://staging.ws.timbox.com.mx/cancelacion/wsdl";
 $wsdl_usuario = "AAA010101000";
 $wsdl_contrasena = "h6584D56fVdBbSmmnB";
 
-//parametros para la cancelación del CFDI
-//, ,
-$rfc = "AAA010101AAA";
-$uuids_cancelar = array("E28DBCF2-F852-4B2F-8198-CD8383891EB0",
-    "3CFF7200-0DE5-4BEE-AC22-AA2A49052FBC",
-    "51408B33-FE29-47DA-9517-FBF420240FD3");
-$pfx_path = 'archivoPfx.pfx';
-$bin_file = file_get_contents($pfx_path);
-$pfx_base64 = base64_encode($bin_file);
-$pfx_password = "12345678a";
+// Parametros para la cancelación del CFDI
+$rfc_emisor = "AAA010101AAA";
+$rfc_receptor = "IAD121214B34";
+$uuid = "D6B0CDE5-0E45-4049-8B67-E5D5B08ACFC9";
+$total = "7261.60";
 
-//crear un cliente para hacer la petición al WS
+$file_cer_pem = file_get_contents("CSD01_AAA010101AAA.cer.pem");
+$file_key_pem = file_get_contents("CSD01_AAA010101AAA.key.pem");
+
+$uuids_cancelar = array(
+         "folio" => array(
+            "uuid" => $uuid,
+            "rfc_receptor" => $rfc_receptor,
+            "total" => $total
+        )
+        // ... n folio a cancelar
+);
+
+//  Crear un cliente para hacer la petición al WS
 $cliente = new SoapClient($wsdl_url);
 
-//parametros para llamar la funcion cancelar_cfdi
+// Parametros para llamar la funcion cancelar_cfdi
+// Nota: Tener en cuenta el orden de los parametros enviados.
 $parametros = array(
     "username" => $wsdl_usuario,
     "password" => $wsdl_contrasena,
-    "rfcemisor" => $rfc,
-    "uuids" => $uuids_cancelar,
-    "pfxbase64" => $pfx_base64,
-    "pfxpassword" => $pfx_password,
+    "rfc_emisor" => $rfc_emisor,
+    "folios" => $uuids_cancelar,
+    "cert_pem" => $file_cer_pem,
+    "llave_pem" => $file_key_pem,
 );
 
 try {
-    //llamar la funcion cancelar_cfdi
+    // Llamar la funcion cancelar_cfdi
     $respuesta = $cliente->__soapCall("cancelar_cfdi", $parametros);
-    echo $respuesta->comprobantes_cancelados;
+    echo $respuesta->acuse_cancelacion;
 } catch (Exception $exception) {
-    //imprimir los mensajes de la excepcion
+    // Imprimir los mensajes de la excepcion
     echo "# del error: " . $exception->getCode() . "\n";
     echo "Descripción del error: " . $exception->getMessage() . "\n";
 }
-
-?>
