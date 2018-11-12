@@ -283,3 +283,4 @@ try {
     echo "Descripción del error: " . $exception->getMessage() . "\n";
 }
 ```
+**Nota:** Tener en cuenta el orden de los parámetros enviados en cada uno de los ejemplos anteriores.
