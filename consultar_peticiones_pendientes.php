@@ -6,7 +6,7 @@ $wsdl_usuario = "AAA010101000";
 $wsdl_contrasena = "h6584D56fVdBbSmmnB";
 
 //parametros para la cancelación del CFDI
-$rfc_emisor = "AAA010101AAA";
+$rfc_receptor = "AAA010101AAA";
 
 $file_cer_pem = file_get_contents("CSD01_AAA010101AAA.cer.pem");
 $file_key_pem = file_get_contents("CSD01_AAA010101AAA.key.pem");
@@ -19,7 +19,7 @@ $cliente = new SoapClient($wsdl_url);
 $parametros = array(
     "username" => $wsdl_usuario,
     "password" => $wsdl_contrasena,
-    "rfc_receptor" => $rfc_emisor,
+    "rfc_receptor" => $rfc_receptor,
     "cert_pem" => $file_cer_pem,
     "llave_pem" => $file_key_pem,
 );

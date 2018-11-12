@@ -26,7 +26,7 @@ La solución es editar el archivo php.ini generalmente ubicado en **/etc/php.ini
     **sudo apachectl restart**
     
 ## Timbrar CFDI
-### Generacion de Sello
+### Generación de Sello
 Para generar el sello se necesita: la llave privada (.key) en formato PEM y el XSLT del SAT (cadenaoriginal_3_3.xslt).El XSLT del SAT se utiliza para poder transformar el XML y obtener la cadena original.
 
 De la cadena original se obtiene el digest y luego se utiliza el digest y la llave privada para obtener el sello. Todo esto se realiza con comandos de OpenSSL.
@@ -48,7 +48,7 @@ Crear un cliente y hacer el llamado al método timbrar_cfdi enviándole los para
 $wsdl_url = "https://staging.ws.timbox.com.mx/timbrado_cfdi33/wsdl";
 $wsdl_usuario = "AAA010101000";
 $wsdl_contrasena = "h6584D56fVdBbSmmnB";
-$ruta_xml = "archivoXml.xml";
+$ruta_xml = "ejemplo_cfdi_33.xml";
 
 #convertir la cadena del xml en base64
 $documento_xml = file_get_contents($ruta_xml);
@@ -179,7 +179,7 @@ try {
 ```
 
 ## Consultar Peticiones Pendientes
-Para la consulta de peticiones pendientes son necesarios el certificado y llave, en formato pem que corresponde al emisor del comprobante:
+Para la consulta de peticiones pendientes son necesarios el certificado y llave, en formato pem que corresponde al receptor del comprobante:
 ```
 $file_cer_pem = file_get_contents("CSD01_AAA010101AAA.cer.pem");
 $file_key_pem = file_get_contents("CSD01_AAA010101AAA.key.pem");
@@ -225,7 +225,7 @@ try {
 ```
 
 ## Procesar Respuesta
-Para realizar la petición de aceptación/rechazo de la solicitud de cancelación son necesarios el certificado y llave, en formato pem que corresponde al emisor del comprobante:
+Para realizar la petición de aceptación/rechazo de la solicitud de cancelación son necesarios el certificado y llave, en formato pem que corresponde al receptor del comprobante:
 ```
 $file_cer_pem = file_get_contents("CSD01_AAA010101AAA.cer.pem");
 $file_key_pem = file_get_contents("CSD01_AAA010101AAA.key.pem");
