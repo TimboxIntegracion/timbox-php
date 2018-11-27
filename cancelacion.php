@@ -15,7 +15,7 @@ $file_cer_pem = file_get_contents("CSD01_AAA010101AAA.cer.pem");
 $file_key_pem = file_get_contents("CSD01_AAA010101AAA.key.pem");
 
 $uuids_cancelar = array(
-         "folio" => array(
+          array(
             "uuid" => $uuid,
             "rfc_receptor" => $rfc_receptor,
             "total" => $total

@@ -17,7 +17,7 @@ $file_key_pem = file_get_contents("CSD01_AAA010101AAA.key.pem");
 $respuesta_de_solicitud = 'A';
 
 $respuestas = array(
-	"folios_respuestas" => array(
+	array(
 		"uuid" => $uuid,
 		"rfc_emisor" => $rfc_emisor,
 		"total" => $total,
