@@ -11,7 +11,7 @@ $rfc_receptor = "IAD121214B34";
 $uuid  = "D6B0CDE5-0E45-4049-8B67-E5D5B08ACFC9";
 $total = "7261.60";
 //crear un cliente para hacer la petición al WS
-$cliente = new SoapClient($wsdl_url);
+$cliente = new SoapClient($wsdl_url, array('trace' => 1, 'use' => SOAP_LITERAL));
 
 // Parametros para llamar la funcion consultar_estatus
 // Nota: Tener en cuenta el orden de los parametros enviados.

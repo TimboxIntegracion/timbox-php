@@ -27,7 +27,7 @@ $respuestas = array(
 	);
 
 // Crear un cliente para hacer la petición al WS
-$cliente = new SoapClient($wsdl_url);
+$cliente = new SoapClient($wsdl_url, array('trace' => 1, 'use' => SOAP_LITERAL));
 
 // Parametros para llamar la funcion procesar_respuesta
 // Nota: Tener en cuenta el orden de los parámetros enviados.

@@ -113,7 +113,7 @@ $uuids_cancelar = array(
 );
 
 // Crear un cliente para hacer la petición al WS
-$cliente = new SoapClient($wsdl_url);
+$cliente = new SoapClient($wsdl_url, array('trace' => 1, 'use' => SOAP_LITERAL));
 
 // Parametros para llamar la funcion cancelar_cfdi
 // Nota: Tener en cuenta el orden de los parametros enviados.
@@ -153,7 +153,7 @@ $rfc_receptor = "IAD121214B34";
 $uuid  = "56756B66-A0E5-4D90-ACF5-0912DFA354B0";
 $total = "7261.60";
 //crear un cliente para hacer la petición al WS
-$cliente = new SoapClient($wsdl_url);
+$cliente = new SoapClient($wsdl_url, array('trace' => 1, 'use' => SOAP_LITERAL));
 
 // Parametros para llamar la funcion consultar_estatus
 // Nota: Tener en cuenta el orden de los parametros enviados.
@@ -198,7 +198,7 @@ $file_cer_pem = file_get_contents("CSD01_AAA010101AAA.cer.pem");
 $file_key_pem = file_get_contents("CSD01_AAA010101AAA.key.pem");
 
 // Crear un cliente para hacer la petición al WS
-$cliente = new SoapClient($wsdl_url);
+$cliente = new SoapClient($wsdl_url, array('trace' => 1, 'use' => SOAP_LITERAL));
 
 // Parametros para llamar la funcion consultar_peticiones_pendientes
 // Nota: Tener en cuenta el orden de los parametros enviados.
@@ -259,7 +259,7 @@ $respuestas = array(
 	);
 
 // Crear un cliente para hacer la petición al WS
-$cliente = new SoapClient($wsdl_url);
+$cliente = new SoapClient($wsdl_url, array('trace' => 1, 'use' => SOAP_LITERAL));
 
 // Parametros para llamar la funcion procesar_respuesta
 // Nota: Tener en cuenta el orden de los parámetros enviados.
@@ -304,7 +304,7 @@ $file_cer_pem = file_get_contents("CSD01_AAA010101AAA.cer.pem");
 $file_key_pem = file_get_contents("CSD01_AAA010101AAA.key.pem");
 
 // crear un cliente para hacer la petición al WS
-$cliente = new SoapClient($wsdl_url);
+$cliente = new SoapClient($wsdl_url, array('trace' => 1, 'use' => SOAP_LITERAL));
 
 // Parametros para llamar la funcion consultar_documento_relacionado
 // Nota: Tener en cuenta el orden de los parametros enviados.

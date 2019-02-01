@@ -24,7 +24,7 @@ $uuids_cancelar = array(
 );
 
 //  Crear un cliente para hacer la petición al WS
-$cliente = new SoapClient($wsdl_url);
+$cliente = new SoapClient($wsdl_url, array('trace' => 1, 'use' => SOAP_LITERAL));
 
 // Parametros para llamar la funcion cancelar_cfdi
 // Nota: Tener en cuenta el orden de los parametros enviados.
