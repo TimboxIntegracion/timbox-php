@@ -7,7 +7,13 @@ function actualizarSello($archivoXml){
     $xmlDoc->load($archivoXml);
     
     //Cambiar Fecha a actual y guardar en archivo
-    date_default_timezone_set('America/Mexico_City');
+    
+    //Obtener el lugar de expedicion del xml
+    $lugarDeExpedicion = $xmlDoc->firstChild->getAttribute('LugarExpedicion');
+    //Consultar la zona horaria segun el lugar de expedición
+    $zonaHoraria = zonaHorariaPorCP($lugarDeExpedicion);
+    //Establecer la zona horaria 
+    date_default_timezone_set($zonaHoraria);
     $date = date('Y-m-d_H:i:s');
     $date = str_replace("_", "T", $date);
     $xmlDoc->firstChild->setAttribute('Fecha', $date);
@@ -38,6 +44,21 @@ function actualizarSello($archivoXml){
     $xmlDoc->firstChild->setAttribute('Sello', $sello);
     $xmlString = $xmlDoc->saveXML();
     file_put_contents($archivoXml, $xmlString);    
+}
+
+// Esta funcion se utiliza para obtener la zona horaria
+// en base al lugar de expedición
+function zonaHorariaPorCP($lugarDeExpedicion){
+    $f = fopen('cat_postal_codes.csv', "r");
+    $timeZone = '';
+    while ($row = fgetcsv($f)) {
+        if ($row[1] == $lugarDeExpedicion) {
+            $timeZone = $row[6];
+            break;
+        }
+    }
+    fclose($f);
+    return $timeZone;
 }
 
 //parametros para conexion al Webservice (URL de Pruebas)
