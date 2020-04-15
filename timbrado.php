@@ -89,6 +89,9 @@ $parametros = array(
 try {
     //llamar la funcion timbrar_cfdi
     $respuesta = $cliente->__soapCall("timbrar_cfdi", $parametros);
+    echo "\nResponse:\n";
+    var_dump($respuesta);
+    echo "\n\nCFDI Timbrado:\n";
     //imprimir el contenido del XML timbrado
     echo htmlspecialchars($respuesta->xml);
 
