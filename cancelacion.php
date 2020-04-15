@@ -40,6 +40,11 @@ $parametros = array(
 try {
     // Llamar la funcion cancelar_cfdi
     $respuesta = $cliente->__soapCall("cancelar_cfdi", $parametros);
+    echo "\nResponse:\n";
+    var_dump($respuesta);
+    echo "\nNodo Folios:\n";
+    echo $respuesta->folios_cancelacion;
+    echo "\n\nNodo Acuse:\n";
     echo $respuesta->acuse_cancelacion;
 } catch (Exception $exception) {
     // Imprimir los mensajes de la excepcion
