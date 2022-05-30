@@ -2,8 +2,8 @@
 
 // Parametros para la conexión al Webservice
 $wsdl_url = "https://staging.ws.timbox.com.mx/cancelacion/wsdl";
-$wsdl_usuario = "AAA010101000";
-$wsdl_contrasena = "h6584D56fVdBbSmmnB";
+$wsdl_usuario = "";
+$wsdl_contrasena = "";
 
 // Parametros para la consulta del CFDI
 $rfc_emisor = "AAA010101AAA";

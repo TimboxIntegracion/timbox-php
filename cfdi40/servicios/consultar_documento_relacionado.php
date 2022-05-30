@@ -2,15 +2,15 @@
 
 // Parametros para la conexión al Webservice
 $wsdl_url = "https://staging.ws.timbox.com.mx/cancelacion/wsdl";
-$wsdl_usuario = "AAA010101000";
-$wsdl_contrasena = "h6584D56fVdBbSmmnB";
+$wsdl_usuario = "";
+$wsdl_contrasena = "";
 
 // Parametros para la consulta de documentos relacionados
 $rfc_receptor = "AAA010101AAA";
 $uuid  = "3E30C124-58FB-408B-84D6-C253E8E573F1";
 
-$file_cer_pem = file_get_contents("CSD01_AAA010101AAA.cer.pem");
-$file_key_pem = file_get_contents("CSD01_AAA010101AAA.key.pem");
+$file_cer_pem = file_get_contents('../certificados_keys_pruebas/EKU9003173C9.cer.pem');
+$file_key_pem = file_get_contents('../certificados_keys_pruebas/EKU9003173C9.key.pem');
 
 // crear un cliente para hacer la petición al WS
 $cliente = new SoapClient($wsdl_url, array('trace' => 1, 'use' => SOAP_LITERAL));
