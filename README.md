@@ -87,6 +87,13 @@ try {
 ```
 
 ## Cancelar CFDI
+A partir del 2022 será necesario señalar el motivo de la cancelación de los comprobantes. Al seleccionar como motivo de cancelación la clave 01 “Comprobante emitido con errores con relación deberá relacionarse el folio fiscal del comprobante que sustituye al cancelado. Se actualizan los plazos para realizar la cancelación de facturas.
+
+**<b> Motivos de Cancelación (Código - Descripción) </b><br>**
+**<b>  01    -    Comprobante emitido con errores con relación </b><br>**
+**<b>  02    -    Comprobante emitido con errores sin relación </b><br>**
+**<b>  03    -    No se llevó a cabo la operación </b><br>**
+**<b>  04    -    Operación nominativa relacionada en la factura global</b><br>**
 Para la cancelación son necesarios el certificado y llave, en formato pem que corresponde al emisor del comprobante:
 ```
 $file_cer_pem = file_get_contents("CSD01_AAA010101AAA.cer.pem");
