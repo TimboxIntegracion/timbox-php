@@ -3,10 +3,16 @@ Ejemplo con la integración al Webservice de Timbox
 
 Se deberá hacer uso de las URL que hacen referencia al WSDL, en cada petición realizada:
 
-Webservice de Timbrado:
+Webservice de Timbrado 3.3 :
 - [Timbox Pruebas](https://staging.ws.timbox.com.mx/timbrado_cfdi33/wsdl)
 
 - [Timbox Producción](https://sistema.timbox.com.mx/timbrado_cfdi33/wsdl)
+
+Webservice de Timbrado 4.0 :
+- [Timbox Pruebas](https://staging.ws.timbox.com.mx/timbrado_cfdi40/wsdl)
+
+- [Timbox Producción](https://sistema.timbox.com.mx/timbrado_cfdi40/wsdl)
+
 
 Webservice de Cancelación:
 
@@ -46,8 +52,8 @@ Crear un cliente y hacer el llamado al método timbrar_cfdi enviándole los para
 ```
 //parametros para conexion al Webservice (URL de Pruebas)
 $wsdl_url = "https://staging.ws.timbox.com.mx/timbrado_cfdi33/wsdl";
-$wsdl_usuario = "AAA010101000";
-$wsdl_contrasena = "h6584D56fVdBbSmmnB";
+$wsdl_usuario = "usuario";
+$wsdl_contrasena = "contraseña";
 $ruta_xml = "ejemplo_cfdi_33.xml";
 
 #convertir la cadena del xml en base64
@@ -91,40 +97,42 @@ Crear un cliente para hacer la petición de cancelación al webservice:
 ```
 // Parametros para la conexión al Webservice
 $wsdl_url = "https://staging.ws.timbox.com.mx/cancelacion/wsdl";
-$wsdl_usuario = "AAA010101000";
-$wsdl_contrasena = "h6584D56fVdBbSmmnB";
+$wsdl_usuario = "usuario";
+$wsdl_contrasena = "contraseña";
 
 // Parametros para la cancelación del CFDI
-$rfc_emisor = "AAA010101AAA";
-$rfc_receptor = "IAD121214B34";
-$uuid = "8998F324-4421-47F6-B68E-EC283B1545F4";
-$total = "7261.60";
+$rfc_emisor      = 'EKU9003173C9';
+$rfc_receptor    = 'XAXX010101000';
+$uuid            = '926DB77E-8128-4D25-AAF8-045B4258F4A0';
+$total           = '14500.00';
+$motivo          = '02';
+$folio_sustituto = '';
 
-$file_cer_pem = file_get_contents("CSD01_AAA010101AAA.cer.pem");
-$file_key_pem = file_get_contents("CSD01_AAA010101AAA.key.pem");
+$file_cer_pem = file_get_contents('../certificados_keys_pruebas/EKU9003173C9.cer.pem');
+$file_key_pem = file_get_contents('../certificados_keys_pruebas/EKU9003173C9.key.pem');
 
-$uuids_cancelar = array(
-          array(
-            "uuid" => $uuid,
-            "rfc_receptor" => $rfc_receptor,
-            "total" => $total
-        )
-        // ... n folio a cancelar
-);
+$uuids_cancelar = [
+    [
+        'uuid'            => $uuid,
+        'rfc_receptor'    => $rfc_receptor,
+        'total'           => $total,
+        'motivo'          => $motivo,
+        'folio_sustituto' => $folio_sustituto
+    ]];
 
 // Crear un cliente para hacer la petición al WS
 $cliente = new SoapClient($wsdl_url, array('trace' => 1, 'use' => SOAP_LITERAL));
 
 // Parametros para llamar la funcion cancelar_cfdi
 // Nota: Tener en cuenta el orden de los parametros enviados.
-$parametros = array(
-    "username" => $wsdl_usuario,
-    "password" => $wsdl_contrasena,
-    "rfc_emisor" => $rfc_emisor,
-    "folios" => $uuids_cancelar,
-    "cert_pem" => $file_cer_pem,
-    "llave_pem" => $file_key_pem,
-);
+$parametros = [
+    'username'   => $wsdl_usuario,
+    'password'   => $wsdl_contrasena,
+    'rfc_emisor' => $rfc_emisor,
+    'folios'     => $uuids_cancelar,
+    'cert_pem'   => $file_cer_pem,
+    'llave_pem'  => $file_key_pem,
+];
 
 try {
     // Llamar la funcion cancelar_cfdi
@@ -144,8 +152,8 @@ Para la consulta de estatus de CFDI solo es necesario crear un cliente para hace
 ```
 // Parametros para la conexión al Webservice
 $wsdl_url = "https://staging.ws.timbox.com.mx/cancelacion/wsdl";
-$wsdl_usuario = "AAA010101000";
-$wsdl_contrasena = "h6584D56fVdBbSmmnB";
+$wsdl_usuario = "usuario";
+$wsdl_contrasena = "contraseña";
 
 // Parametros para la consulta del CFDI
 $rfc_emisor = "AAA010101AAA";
@@ -181,21 +189,21 @@ try {
 ## Consultar Peticiones Pendientes
 Para la consulta de peticiones pendientes son necesarios el certificado y llave, en formato pem que corresponde al receptor del comprobante:
 ```
-$file_cer_pem = file_get_contents("CSD01_AAA010101AAA.cer.pem");
-$file_key_pem = file_get_contents("CSD01_AAA010101AAA.key.pem");
+$file_cer_pem = file_get_contents('../certiificados_key_pruebas/EKU9003173C9.cer.pem');
+$file_key_pem = file_get_contents('../certiificados_key_pruebas/EKU9003173C9.key.pem');
 ```
 Crear un cliente para hacer la petición de consultas pendientes al webservice:
 ```
 // Parametros para la conexión al Webservice
 $wsdl_url = "https://staging.ws.timbox.com.mx/cancelacion/wsdl";
-$wsdl_usuario = "AAA010101000";
-$wsdl_contrasena = "h6584D56fVdBbSmmnB";
+$wsdl_usuario = "usuario";
+$wsdl_contrasena = "contraseña";
 
 // Parametros para la cancelación del CFDI
-$rfc_emisor = "AAA010101AAA";
+$rfc_emisor = "EKU9003173C9";
 
-$file_cer_pem = file_get_contents("CSD01_AAA010101AAA.cer.pem");
-$file_key_pem = file_get_contents("CSD01_AAA010101AAA.key.pem");
+$file_cer_pem = file_get_contents('../certiificados_key_pruebas/EKU9003173C9.cer.pem');
+$file_key_pem = file_get_contents('../certiificados_key_pruebas/EKU9003173C9.key.pem');
 
 // Crear un cliente para hacer la petición al WS
 $cliente = new SoapClient($wsdl_url, array('trace' => 1, 'use' => SOAP_LITERAL));
@@ -227,15 +235,15 @@ try {
 ## Procesar Respuesta
 Para realizar la petición de aceptación/rechazo de la solicitud de cancelación son necesarios el certificado y llave, en formato pem que corresponde al receptor del comprobante:
 ```
-$file_cer_pem = file_get_contents("CSD01_AAA010101AAA.cer.pem");
-$file_key_pem = file_get_contents("CSD01_AAA010101AAA.key.pem");
+$file_cer_pem = file_get_contents('../certiificados_key_pruebas/EKU9003173C9.cer.pem');
+$file_key_pem = file_get_contents('../certiificados_key_pruebas/EKU9003173C9.key.pem');
 ```
 Crear un cliente para hacer la petición de aceptación/rechazo al webservice:
 ```
 // Parametros para la conexión al Webservice
 $wsdl_url = "https://staging.ws.timbox.com.mx/cancelacion/wsdl";
-$wsdl_usuario = "AAA010101000";
-$wsdl_contrasena = "h6584D56fVdBbSmmnB";
+$wsdl_usuario = "usuario";
+$wsdl_contrasena = "contraseña";
 
 // Parametros para procesar respuesta del CFDI
 $rfc_emisor = "AAA010101AAA";
@@ -286,22 +294,22 @@ try {
 ## Consultar Documentos Relacionados
 Para realizar la petición de consultar documentos relacionado son necesarios el certificado y llave, en formato pem que corresponde al receptor del comprobante:
 ```
-$file_cer_pem = file_get_contents("CSD01_AAA010101AAA.cer.pem");
-$file_key_pem = file_get_contents("CSD01_AAA010101AAA.key.pem");
+$file_cer_pem = file_get_contents('../certiificados_key_pruebas/EKU9003173C9.cer.pem');
+$file_key_pem = file_get_contents('../certiificados_key_pruebas/EKU9003173C9.key.pem');
 ```
 Crear un cliente para hacer la petición de consulta al webservice:
 ```
 // Parametros para la conexión al Webservice
 $wsdl_url = "https://staging.ws.timbox.com.mx/cancelacion/wsdl";
-$wsdl_usuario = "AAA010101000";
-$wsdl_contrasena = "h6584D56fVdBbSmmnB";
+$wsdl_usuario = "usuario";
+$wsdl_contrasena = "contraseña";
 
 // Parametros para la consulta de documentos relacionados
-$rfc_receptor = "AAA010101AAA";
+$rfc_receptor = "EKU9003173C9";
 $uuid  = "87852B30-543F-4C11-AD33-3DC0D3F493B0";
 
-$file_cer_pem = file_get_contents("CSD01_AAA010101AAA.cer.pem");
-$file_key_pem = file_get_contents("CSD01_AAA010101AAA.key.pem");
+$file_cer_pem = file_get_contents('../certiificados_key_pruebas/EKU9003173C9.cer.pem');
+$file_key_pem = file_get_contents('../certiificados_key_pruebas/EKU9003173C9.key.pem');
 
 // crear un cliente para hacer la petición al WS
 $cliente = new SoapClient($wsdl_url, array('trace' => 1, 'use' => SOAP_LITERAL));
@@ -332,8 +340,8 @@ Para la validacion de CFDI solo es necesario crear un cliente para hacer la peti
 ```
 // Parametros para la conexión al Webservice
 $wsdl_url = "https://staging.ws.timbox.com.mx/valida_cfdi/wsdl";
-$wsdl_usuario = "AAA010101000";
-$wsdl_contrasena = "h6584D56fVdBbSmmnB";
+$wsdl_usuario = "usuario";
+$wsdl_contrasena = "contraseña";
 
 // Parametros para la validacion del CFDI
 $file_xml = file_get_contents("ejemplo_cfdi_33.xml");
