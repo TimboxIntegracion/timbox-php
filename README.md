@@ -3,11 +3,6 @@ Ejemplo con la integración al Webservice de Timbox
 
 Se deberá hacer uso de las URL que hacen referencia al WSDL, en cada petición realizada:
 
-Webservice de Timbrado 3.3 :
-- [Timbox Pruebas](https://staging.ws.timbox.com.mx/timbrado_cfdi33/wsdl)
-
-- [Timbox Producción](https://sistema.timbox.com.mx/timbrado_cfdi33/wsdl)
-
 Webservice de Timbrado 4.0 :
 - [Timbox Pruebas](https://staging.ws.timbox.com.mx/timbrado_cfdi40/wsdl)
 
@@ -33,7 +28,7 @@ La solución es editar el archivo php.ini generalmente ubicado en **/etc/php.ini
     
 ## Timbrar CFDI
 ### Generación de Sello
-Para generar el sello se necesita: la llave privada (.key) en formato PEM y el XSLT del SAT (cadenaoriginal_3_3.xslt).El XSLT del SAT se utiliza para poder transformar el XML y obtener la cadena original.
+Para generar el sello se necesita: la llave privada (.key) en formato PEM y el XSLT del SAT (cadenaoriginal_4_0.xslt).El XSLT del SAT se utiliza para poder transformar el XML y obtener la cadena original.
 
 De la cadena original se obtiene el digest y luego se utiliza el digest y la llave privada para obtener el sello. Todo esto se realiza con comandos de OpenSSL.
 
@@ -51,10 +46,10 @@ Crear un cliente y hacer el llamado al método timbrar_cfdi enviándole los para
 
 ```
 //parametros para conexion al Webservice (URL de Pruebas)
-$wsdl_url = "https://staging.ws.timbox.com.mx/timbrado_cfdi33/wsdl";
+$wsdl_url = "https://staging.ws.timbox.com.mx/timbrado_cfdi40/wsdl";
 $wsdl_usuario = "usuario";
 $wsdl_contrasena = "contraseña";
-$ruta_xml = "ejemplo_cfdi_33.xml";
+$ruta_xml = "ejemplo_cfdi_40.xml";
 
 #convertir la cadena del xml en base64
 $documento_xml = file_get_contents($ruta_xml);
@@ -351,7 +346,7 @@ $wsdl_usuario = "usuario";
 $wsdl_contrasena = "contraseña";
 
 // Parametros para la validacion del CFDI
-$file_xml = file_get_contents("ejemplo_cfdi_33.xml");
+$file_xml = file_get_contents("ejemplo_cfdi_40.xml");
 $xml = base64_encode($file_xml);
 $comprobantes = array(
 	array(
